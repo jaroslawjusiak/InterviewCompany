@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using InterviewCompany.Core;
+using InterviewCompany.Domain;
+using InterviewCompany.Domain.Repositories;
+using InterviewCompany.Domain.Repositories.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -36,6 +39,9 @@ namespace InterviewCompany.API
                     = Configuration.GetSection("MongoSettings:Database").Value;
             });
             services.AddSingleton(new MongoClient(Configuration.GetSection("MongoSettings:ConnectionString").Value));
+            services.AddScoped<IInvoiceRepository, MongoInvoiceRepository>();
+            services.AddScoped<MongoDbContext>();
+            services.AddScoped<ICurrencyRepository, MongoCurrencyRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
