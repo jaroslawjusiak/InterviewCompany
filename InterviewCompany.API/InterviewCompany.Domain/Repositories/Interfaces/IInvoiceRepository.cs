@@ -12,5 +12,6 @@ namespace InterviewCompany.Domain.Repositories.Interfaces
         Task<Invoice> GetByNumberAsync(string number);
         Task InsertOneAsync(Invoice invoice);
         Task<bool> RemoveOneAsync(Guid id);
+        Task<int> GetLastInvoiceNumberAsync();
     }
 }

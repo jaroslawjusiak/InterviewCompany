@@ -43,6 +43,7 @@ namespace InterviewCompany.API
             services.AddScoped<MongoDbContext>();
             services.AddScoped<ICurrencyRepository, MongoCurrencyRepository>();
             services.AddScoped<InvoiceService>();
+            services.AddScoped<CurrencyService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

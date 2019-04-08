@@ -1,5 +1,6 @@
 ﻿using InterviewCompany.Domain.Documents;
 using InterviewCompany.Domain.Repositories.Interfaces;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -43,6 +44,24 @@ namespace InterviewCompany.Domain.Repositories
                 // log or manage the exception
                 throw ex;
             }
+        }
+
+        public async Task<int> GetLastInvoiceNumberAsync()
+        {
+            if(_context.Invoices.Find(_ => true).Any())
+            {
+                var projection = Builders<Invoice>.Projection.Include("Number");
+                var x = await _context.Invoices
+                        .Find(_ => true).Project(projection).FirstOrDefaultAsync();
+
+
+                var lastInvoice  = await _context.Invoices
+                        .Find(_ => true)
+                        .SortByDescending(i => i.Number).FirstOrDefaultAsync();
+                return lastInvoice.Number;
+            }
+
+            return 0;
         }
 
         public async Task InsertOneAsync(Invoice invoice)

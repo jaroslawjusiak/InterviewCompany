@@ -1,4 +1,5 @@
-﻿using InterviewCompany.Domain.Documents;
+﻿using AutoMapper;
+using InterviewCompany.Domain.Documents;
 using InterviewCompany.Domain.Model;
 using InterviewCompany.Domain.Repositories.Interfaces;
 using System;
@@ -11,10 +12,14 @@ namespace InterviewCompany.Service
     public class InvoiceService : IInvoiceService
     {
         private readonly IInvoiceRepository _invoiceRepository;
+        private readonly ICurrencyRepository _currencyRepository;
+        private readonly IMapper _mapper;
 
-        public InvoiceService(IInvoiceRepository invoiceRepository)
+        public InvoiceService(IInvoiceRepository invoiceRepository, ICurrencyRepository currencyRepository, IMapper mapper)
         {
             this._invoiceRepository = invoiceRepository;
+            this._currencyRepository = currencyRepository;
+            this._mapper = mapper;
         }
 
         public async Task<IEnumerable<Invoice>> GetAllAsync()
@@ -24,11 +29,15 @@ namespace InterviewCompany.Service
 
         public async Task<Invoice> GetByNumberAsync(string number)
         {
-            throw new NotImplementedException();
+            return await _invoiceRepository.GetByNumberAsync(number);
         }
 
-        public async Task<Invoice> InsertOneAsync(AddInvoiceModel invoice)
+        public async Task<Invoice> InsertOneAsync(AddInvoiceModel invoiceModel)
         {
+            var invoice = _mapper.Map<Invoice>(invoiceModel);
+            invoice.Number = await GenerateInvoiceNumberAsync();
+            invoice.TotalAmount = CalculateTotalAmount(invoice.Items);
+
             throw new NotImplementedException();
         }
 
@@ -36,5 +45,20 @@ namespace InterviewCompany.Service
         {
             throw new NotImplementedException();
         }
+
+        #region Private members
+
+        private async Task<int> GenerateInvoiceNumberAsync()
+        {
+            var lastInvoiceNumber = await _invoiceRepository.GetLastInvoiceNumberAsync();
+            return ++lastInvoiceNumber;
+        }
+
+        private decimal CalculateTotalAmount(InvoiceItem[] items)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

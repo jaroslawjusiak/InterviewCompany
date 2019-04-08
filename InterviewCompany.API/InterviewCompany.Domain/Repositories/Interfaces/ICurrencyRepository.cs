@@ -8,6 +8,7 @@ namespace InterviewCompany.Domain.Repositories.Interfaces
 {
     public interface ICurrencyRepository
     {
+        List<Currency> GetAll();
         Task<bool> UpdateAsync(Currency currency);
         Task InsertOneAsync(Currency currency);
     }

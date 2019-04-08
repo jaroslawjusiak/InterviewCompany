@@ -39,6 +39,9 @@ namespace InterviewCompany.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]AddInvoiceModel invoiceModel)
         {
+            if (!ModelState.IsValid)
+                return BadRequest();
+
             return Created("api/Invoices", await _invoiceService.InsertOneAsync(invoiceModel));
         }
 
