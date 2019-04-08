@@ -1,10 +1,6 @@
-﻿using InterviewCompany.Core;
-using InterviewCompany.Domain.Documents;
+﻿using InterviewCompany.Domain.Documents;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace InterviewCompany.Domain
 {

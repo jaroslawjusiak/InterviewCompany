@@ -4,7 +4,7 @@ using InterviewCompany.Domain.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
-f
+
 namespace InterviewCompany.Service.Mappings
 {
     public class AddInvoiceMapping : Profile
