@@ -11,7 +11,7 @@ namespace InterviewCompany.Service
     {
         Task<IEnumerable<Invoice>> GetAllAsync();
         Task<Invoice> GetByNumberAsync(string number);
-        Task InsertOneAsync(AddInvoiceModel invoice);
+        Task<Invoice> InsertOneAsync(AddInvoiceModel invoice);
         Task<bool> RemoveOneAsync(Guid id);
     }
 }

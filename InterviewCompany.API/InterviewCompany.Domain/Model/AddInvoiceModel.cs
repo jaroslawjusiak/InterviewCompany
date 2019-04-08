@@ -8,7 +8,8 @@ namespace InterviewCompany.Domain.Model
     public class AddInvoiceModel
     {
         public DateTime IssueDate { get; set; }
-        public Customer Customer { get; set; }
+        public Customer BillTo { get; set; }
+        public Customer Issuer { get; set; }
         public decimal TotalAmount { get; set; }
         public InvoiceItem[] Items { get; set; }
     }

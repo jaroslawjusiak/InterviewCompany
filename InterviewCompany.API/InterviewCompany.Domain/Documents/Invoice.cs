@@ -12,7 +12,8 @@ namespace InterviewCompany.Domain.Documents
         public Guid Id { get; set; }
         public int Number { get; set; }
         public DateTime IssueDate { get; set; }
-        public Customer Customer { get; set; }
+        public Customer BillTo { get; set; }
+        public Customer Issuer { get; set; }
         public InvoiceItem[] Items { get; set; }
         public decimal TotalAmount { get; set; }
     }

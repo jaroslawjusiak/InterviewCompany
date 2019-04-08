@@ -27,7 +27,7 @@ namespace InterviewCompany.Service
             throw new NotImplementedException();
         }
 
-        public async Task InsertOneAsync(AddInvoiceModel invoice)
+        public async Task<Invoice> InsertOneAsync(AddInvoiceModel invoice)
         {
             throw new NotImplementedException();
         }
