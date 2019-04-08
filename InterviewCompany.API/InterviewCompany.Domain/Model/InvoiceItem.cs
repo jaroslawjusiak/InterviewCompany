@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace InterviewCompany.Domain.Documents
+namespace InterviewCompany.Domain.Model
 {
     public class InvoiceItem
     {

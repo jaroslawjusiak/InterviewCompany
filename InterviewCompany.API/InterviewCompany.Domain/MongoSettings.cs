@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace InterviewCompany.Core
+namespace InterviewCompany.Domain
 {
     public class MongoSettings
     {

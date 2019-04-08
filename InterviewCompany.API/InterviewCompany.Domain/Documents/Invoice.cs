@@ -1,8 +1,7 @@
-﻿using MongoDB.Bson;
+﻿using InterviewCompany.Domain.Model;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace InterviewCompany.Domain.Documents
 {
@@ -14,6 +13,7 @@ namespace InterviewCompany.Domain.Documents
         public int Number { get; set; }
         public DateTime IssueDate { get; set; }
         public Customer Customer { get; set; }
+        public InvoiceItem[] Items { get; set; }
         public decimal TotalAmount { get; set; }
     }
 }

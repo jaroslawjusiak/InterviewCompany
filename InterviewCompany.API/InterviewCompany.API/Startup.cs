@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using InterviewCompany.Core;
 using InterviewCompany.Domain;
 using InterviewCompany.Domain.Repositories;
 using InterviewCompany.Domain.Repositories.Interfaces;
+using InterviewCompany.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -42,6 +42,7 @@ namespace InterviewCompany.API
             services.AddScoped<IInvoiceRepository, MongoInvoiceRepository>();
             services.AddScoped<MongoDbContext>();
             services.AddScoped<ICurrencyRepository, MongoCurrencyRepository>();
+            services.AddScoped<InvoiceService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
