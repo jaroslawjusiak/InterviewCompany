@@ -4,7 +4,7 @@ using InterviewCompany.Domain.Model;
 using InterviewCompany.Domain.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace InterviewCompany.Service
@@ -36,7 +36,7 @@ namespace InterviewCompany.Service
         {
             var invoice = _mapper.Map<Invoice>(invoiceModel);
             invoice.Number = await GenerateInvoiceNumberAsync();
-            invoice.TotalAmount = CalculateTotalAmount(invoice.Items);
+            invoice.TotalAmount = await CalculateTotalAmount(invoice.Items);
 
             throw new NotImplementedException();
         }
@@ -54,9 +54,25 @@ namespace InterviewCompany.Service
             return ++lastInvoiceNumber;
         }
 
-        private decimal CalculateTotalAmount(InvoiceItem[] items)
+        private async Task<decimal> CalculateTotalAmount(InvoiceItem[] items)
         {
-            throw new NotImplementedException();
+            var currencies = await _currencyRepository.GetAllAsync();
+            var total = 0m;
+
+            foreach(var item in items)
+            {
+                if (!item.CurrencyCode.Equals("USD"))
+                {
+                    var exchangeRate = currencies.First(c => c.Code.Equals(item.CurrencyCode)).ExchangeRate;
+                    total += item.Quantity * item.UnitCost * exchangeRate;
+                }
+                else
+                {
+                    total += item.Quantity * item.UnitCost;
+                }
+            }
+
+            return total;
         }
 
         #endregion
