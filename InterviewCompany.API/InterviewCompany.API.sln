@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InterviewCompany.Core", "In
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InterviewCompany.Service", "InterviewCompany.Service\InterviewCompany.Service.csproj", "{69FCDC65-F57A-45B8-A6BC-950ABE00A914}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterviewComany.Tests", "InterviewComany.Tests\InterviewComany.Tests.csproj", "{A6D8F728-1263-4677-84BE-81B1D25F4741}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterviewCompany.Tests", "InterviewComany.Tests\InterviewCompany.Tests.csproj", "{A6D8F728-1263-4677-84BE-81B1D25F4741}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
