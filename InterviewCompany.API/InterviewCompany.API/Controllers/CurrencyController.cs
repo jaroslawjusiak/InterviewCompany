@@ -51,7 +51,7 @@ namespace InterviewCompany.API.Controllers
             if (results.Status == ValidationStatus.Error)
                 return BadRequest(results.ErrorMessages);
 
-            return NotFound();
+            return NoContent();
         }
     }
 }

@@ -3,6 +3,7 @@ using InterviewCompany.Service.Validators;
 using InterviewCompany.Tests.Data;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -27,9 +28,15 @@ namespace InterviewCompany.Tests
         public void NotAllowAddExistingCurrency(string code, string name, decimal exchangeRate, DateTime exchangeRateDate)
         {
             var currency = new Currency { Code = code, Name = name, ExchangeRate = exchangeRate, ExchangeRateDate = exchangeRateDate };
-            var validationStatus = _validator.Validate(_availableCurrencies, CurrencyDbAction.Insert, currency).Status;
+            var validationResult = _validator.Validate(_availableCurrencies, CurrencyDbAction.Insert, currency);
 
-            Assert.True(validationStatus == ValidationStatus.Error);
+            if (validationResult.ErrorMessages.Any())
+            {
+                foreach (var message in validationResult.ErrorMessages)
+                    _output.WriteLine(message);
+            }
+
+            Assert.True(validationResult.Status == ValidationStatus.Error);
         }
 
 
@@ -38,9 +45,15 @@ namespace InterviewCompany.Tests
         public void NotAllowUpdateNonExistingCurrency(string code, string name, decimal exchangeRate, DateTime exchangeRateDate)
         {
             var currency = new Currency { Code = code, Name = name, ExchangeRate = exchangeRate, ExchangeRateDate = exchangeRateDate };
-            var validationStatus = _validator.Validate(_availableCurrencies, CurrencyDbAction.Update, currency).Status;
+            var validationResult = _validator.Validate(_availableCurrencies, CurrencyDbAction.Update, currency);
 
-            Assert.True(validationStatus == ValidationStatus.Error);
+            if (validationResult.ErrorMessages.Any())
+            {
+                foreach (var message in validationResult.ErrorMessages)
+                    _output.WriteLine(message);
+            }
+
+            Assert.True(validationResult.Status == ValidationStatus.Error);
         }
 
         [Theory]
@@ -48,9 +61,15 @@ namespace InterviewCompany.Tests
         public void NotAllowUpdateCurrencyWithFutureDate(string code, string name, decimal exchangeRate, DateTime exchangeRateDate)
         {
             var currency = new Currency { Code = code, Name = name, ExchangeRate = exchangeRate, ExchangeRateDate = exchangeRateDate };
-            var validationStatus = _validator.Validate(_availableCurrencies, CurrencyDbAction.Update, currency).Status;
+            var validationResult = _validator.Validate(_availableCurrencies, CurrencyDbAction.Update, currency);
 
-            Assert.True(validationStatus == ValidationStatus.Error);
+            if (validationResult.ErrorMessages.Any())
+            {
+                foreach (var message in validationResult.ErrorMessages)
+                    _output.WriteLine(message);
+            }
+
+            Assert.True(validationResult.Status == ValidationStatus.Error);
         }
 
 

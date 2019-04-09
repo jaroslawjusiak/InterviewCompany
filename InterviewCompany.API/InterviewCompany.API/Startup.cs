@@ -7,6 +7,7 @@ using InterviewCompany.Domain;
 using InterviewCompany.Domain.Repositories;
 using InterviewCompany.Domain.Repositories.Interfaces;
 using InterviewCompany.Service;
+using InterviewCompany.Service.Tools;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -46,6 +47,7 @@ namespace InterviewCompany.API
             services.AddScoped<IInvoiceRepository, MongoInvoiceRepository>();
             services.AddScoped<MongoDbContext>();
             services.AddScoped<ICurrencyRepository, MongoCurrencyRepository>();
+            services.AddScoped<InvoiceCalculator>();
             services.AddScoped<InvoiceService>();
             services.AddScoped<CurrencyService>();
         }
