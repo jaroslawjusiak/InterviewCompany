@@ -21,12 +21,34 @@ namespace InterviewCompany.Tests
             Initialize();
         }
 
+
         [Theory]
-        [MemberData(nameof(CurrencyValidatorData.Currencies), MemberType = typeof(CurrencyValidatorData))]
+        [MemberData(nameof(CurrencyValidatorData.ExistingCurrency), MemberType = typeof(CurrencyValidatorData))]
         public void NotAllowAddExistingCurrency(string code, string name, decimal exchangeRate, DateTime exchangeRateDate)
         {
             var currency = new Currency { Code = code, Name = name, ExchangeRate = exchangeRate, ExchangeRateDate = exchangeRateDate };
             var validationStatus = _validator.Validate(_availableCurrencies, CurrencyDbAction.Insert, currency).Status;
+
+            Assert.True(validationStatus == ValidationStatus.Error);
+        }
+
+
+        [Theory]
+        [MemberData(nameof(CurrencyValidatorData.NonExisitngCurrency), MemberType = typeof(CurrencyValidatorData))]
+        public void NotAllowUpdateNonExistingCurrency(string code, string name, decimal exchangeRate, DateTime exchangeRateDate)
+        {
+            var currency = new Currency { Code = code, Name = name, ExchangeRate = exchangeRate, ExchangeRateDate = exchangeRateDate };
+            var validationStatus = _validator.Validate(_availableCurrencies, CurrencyDbAction.Update, currency).Status;
+
+            Assert.True(validationStatus == ValidationStatus.Error);
+        }
+
+        [Theory]
+        [MemberData(nameof(CurrencyValidatorData.ExistingCurrency), MemberType = typeof(CurrencyValidatorData))]
+        public void NotAllowUpdateCurrencyWithFutureDate(string code, string name, decimal exchangeRate, DateTime exchangeRateDate)
+        {
+            var currency = new Currency { Code = code, Name = name, ExchangeRate = exchangeRate, ExchangeRateDate = exchangeRateDate };
+            var validationStatus = _validator.Validate(_availableCurrencies, CurrencyDbAction.Update, currency).Status;
 
             Assert.True(validationStatus == ValidationStatus.Error);
         }
