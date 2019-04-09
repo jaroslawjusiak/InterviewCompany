@@ -17,6 +17,11 @@ namespace InterviewCompany.Domain.Repositories
             this._context = context;
         }
 
+        public List<Currency> GetAll()
+        {
+            return _context.Currencies.Find(_ => true).ToList();
+        }
+
         public async Task<List<Currency>> GetAllAsync()
         {
             return await _context.Currencies.Find(_ => true).ToListAsync();

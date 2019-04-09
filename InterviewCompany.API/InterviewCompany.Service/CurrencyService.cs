@@ -11,30 +11,35 @@ namespace InterviewCompany.Service
     public class CurrencyService
     {
         private readonly ICurrencyRepository _currencyRepository;
+        private List<Currency> _avaiableCurrencies;
 
-        public CurrencyService(ICurrencyRepository currencyRepository)
+        public CurrencyService (ICurrencyRepository currencyRepository)
         {
             this._currencyRepository = currencyRepository;
+            _avaiableCurrencies = _currencyRepository.GetAll();
         }
 
         public async Task InsertCurrency(Currency currency)
         {
-            //if (_currencyRepository. .Any(c=>c.Code.Equals(currency.Code)))
-            //    throw new CurrencyAlreadyExistsException(currency.Code);
+            if (_avaiableCurrencies.Any(c=>c.Code.Equals(currency.Code)))
+                throw new CurrencyAlreadyExistsException(currency.Code);
 
-            //await _currencyRepository.InsertOneAsync(currency);
-            //_systemCurrency.AvaiableCurrencies.Add(currency);
-            throw new NotImplementedException();
+            await _currencyRepository.InsertOneAsync(currency);
+            _avaiableCurrencies.Add(currency);
         }
 
         public async Task UpdateCurrency(Currency currency)
         {
-            //if (!_systemCurrency.AvaiableCurrencies.Any(c => c.Code.Equals(currency.Code)))
-            //    throw new CurrencyNotFoundException(currency.Code);
+            var dbCurrency = _avaiableCurrencies.FirstOrDefault(c => c.Code.Equals(currency.Code));
 
-            //await _currencyRepository.UpdateAsync(currency);
-            //_systemCurrency.Update(currency);
-            throw new NotImplementedException();
+            if (dbCurrency == null)
+                throw new CurrencyNotFoundException(currency.Code);
+
+            if (currency.ExchangeRateDate <= dbCurrency.ExchangeRateDate || currency.ExchangeRateDate > DateTime.Now)
+                throw new InvalidCurrencyExchangeRateDateException(currency.ExchangeRateDate);
+
+            await _currencyRepository.UpdateAsync(currency);
+            _avaiableCurrencies = await _currencyRepository.GetAllAsync();
         }
     }
 }

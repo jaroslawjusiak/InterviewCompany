@@ -1,15 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28729.10
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterviewCompany.API", "InterviewCompany.API\InterviewCompany.API.csproj", "{4FC3F8B2-2D46-45F2-B491-18FF0906E524}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InterviewCompany.API", "InterviewCompany.API\InterviewCompany.API.csproj", "{4FC3F8B2-2D46-45F2-B491-18FF0906E524}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterviewCompany.Domain", "InterviewCompany.Domain\InterviewCompany.Domain.csproj", "{EF7B0AA0-57AF-4380-A096-C1AAE2805E58}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InterviewCompany.Domain", "InterviewCompany.Domain\InterviewCompany.Domain.csproj", "{EF7B0AA0-57AF-4380-A096-C1AAE2805E58}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterviewCompany.Core", "InterviewCompany.Core\InterviewCompany.Core.csproj", "{A17652DB-6B9D-409D-B8B9-371CDC3ED255}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InterviewCompany.Core", "InterviewCompany.Core\InterviewCompany.Core.csproj", "{A17652DB-6B9D-409D-B8B9-371CDC3ED255}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterviewCompany.Service", "InterviewCompany.Service\InterviewCompany.Service.csproj", "{69FCDC65-F57A-45B8-A6BC-950ABE00A914}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InterviewCompany.Service", "InterviewCompany.Service\InterviewCompany.Service.csproj", "{69FCDC65-F57A-45B8-A6BC-950ABE00A914}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterviewComany.Tests", "InterviewComany.Tests\InterviewComany.Tests.csproj", "{A6D8F728-1263-4677-84BE-81B1D25F4741}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{69FCDC65-F57A-45B8-A6BC-950ABE00A914}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69FCDC65-F57A-45B8-A6BC-950ABE00A914}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{69FCDC65-F57A-45B8-A6BC-950ABE00A914}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6D8F728-1263-4677-84BE-81B1D25F4741}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6D8F728-1263-4677-84BE-81B1D25F4741}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6D8F728-1263-4677-84BE-81B1D25F4741}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6D8F728-1263-4677-84BE-81B1D25F4741}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
