@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using InterviewCompany.Domain;
 using InterviewCompany.Domain.Repositories;
 using InterviewCompany.Domain.Repositories.Interfaces;
@@ -39,6 +40,9 @@ namespace InterviewCompany.API
                     = Configuration.GetSection("MongoSettings:Database").Value;
             });
             services.AddSingleton(new MongoClient(Configuration.GetSection("MongoSettings:ConnectionString").Value));
+
+            services.AddAutoMapper();
+
             services.AddScoped<IInvoiceRepository, MongoInvoiceRepository>();
             services.AddScoped<MongoDbContext>();
             services.AddScoped<ICurrencyRepository, MongoCurrencyRepository>();

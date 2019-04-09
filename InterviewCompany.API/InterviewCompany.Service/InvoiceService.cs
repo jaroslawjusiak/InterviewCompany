@@ -32,18 +32,19 @@ namespace InterviewCompany.Service
             return await _invoiceRepository.GetByNumberAsync(number);
         }
 
-        public async Task<Invoice> InsertOneAsync(AddInvoiceModel invoiceModel)
+        public async Task<int> InsertOneAsync(AddInvoiceModel invoiceModel)
         {
             var invoice = _mapper.Map<Invoice>(invoiceModel);
             invoice.Number = await GenerateInvoiceNumberAsync();
             invoice.TotalAmount = await CalculateTotalAmount(invoice.Items);
+            await _invoiceRepository.InsertOneAsync(invoice);
 
-            throw new NotImplementedException();
+            return invoice.Number;
         }
 
         public async Task<bool> RemoveOneAsync(Guid id)
         {
-            throw new NotImplementedException();
+               return await _invoiceRepository.RemoveOneAsync(id);
         }
 
         #region Private members
