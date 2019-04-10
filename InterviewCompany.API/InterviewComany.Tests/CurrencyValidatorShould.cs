@@ -12,13 +12,13 @@ namespace InterviewCompany.Tests
     public class CurrencyValidatorShould
     {
         private readonly ITestOutputHelper _output;
-        private readonly CurrencyValidator _validator;
+        private readonly CurrencyValidator _sut;
         private List<Currency> _availableCurrencies;
 
         public CurrencyValidatorShould(ITestOutputHelper output)
         {
             _output = output;
-            _validator = new CurrencyValidator();
+            _sut = new CurrencyValidator();
             Initialize();
         }
 
@@ -28,7 +28,7 @@ namespace InterviewCompany.Tests
         public void NotAllowAddExistingCurrency(string code, string name, decimal exchangeRate, DateTime exchangeRateDate)
         {
             var currency = new Currency { Code = code, Name = name, ExchangeRate = exchangeRate, ExchangeRateDate = exchangeRateDate };
-            var validationResult = _validator.Validate(_availableCurrencies, CurrencyDbAction.Insert, currency);
+            var validationResult = _sut.Validate(_availableCurrencies, CurrencyDbAction.Insert, currency);
 
             if (validationResult.ErrorMessages.Any())
             {
@@ -45,7 +45,7 @@ namespace InterviewCompany.Tests
         public void NotAllowUpdateNonExistingCurrency(string code, string name, decimal exchangeRate, DateTime exchangeRateDate)
         {
             var currency = new Currency { Code = code, Name = name, ExchangeRate = exchangeRate, ExchangeRateDate = exchangeRateDate };
-            var validationResult = _validator.Validate(_availableCurrencies, CurrencyDbAction.Update, currency);
+            var validationResult = _sut.Validate(_availableCurrencies, CurrencyDbAction.Update, currency);
 
             if (validationResult.ErrorMessages.Any())
             {
@@ -61,7 +61,7 @@ namespace InterviewCompany.Tests
         public void NotAllowUpdateCurrencyWithFutureDate(string code, string name, decimal exchangeRate, DateTime exchangeRateDate)
         {
             var currency = new Currency { Code = code, Name = name, ExchangeRate = exchangeRate, ExchangeRateDate = exchangeRateDate };
-            var validationResult = _validator.Validate(_availableCurrencies, CurrencyDbAction.Update, currency);
+            var validationResult = _sut.Validate(_availableCurrencies, CurrencyDbAction.Update, currency);
 
             if (validationResult.ErrorMessages.Any())
             {

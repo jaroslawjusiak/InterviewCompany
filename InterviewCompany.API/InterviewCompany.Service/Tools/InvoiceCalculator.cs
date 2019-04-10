@@ -1,6 +1,6 @@
 ﻿using InterviewCompany.Domain.Model;
 using InterviewCompany.Domain.Repositories.Interfaces;
-using System;
+using Serilog;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,6 +23,7 @@ namespace InterviewCompany.Service.Tools
 
             foreach (var item in items)
             {
+                Log.Debug(total.ToString());
                 if (!item.CurrencyCode.Equals("USD"))
                 {
                     var exchangeRate = currencies.First(c => c.Code.Equals(item.CurrencyCode)).ExchangeRate;
@@ -32,6 +33,7 @@ namespace InterviewCompany.Service.Tools
                 {
                     total += item.Quantity * item.UnitCost;
                 }
+                Log.Debug($"Total amount so far: {total}");
             }
 
             return total;

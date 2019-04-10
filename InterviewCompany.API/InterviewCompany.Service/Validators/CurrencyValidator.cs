@@ -26,7 +26,11 @@ namespace InterviewCompany.Service.Validators
                         var dbCurrency = avaiableCurrencies.FirstOrDefault(c => c.Code.Equals(currency.Code));
 
                         if (dbCurrency == null)
+                        {
                             _result.ErrorMessages.Add($"Currency with currency code {currency.Code} doesn't exists.");
+                            return _result;
+                        }
+                            
 
                         if (currency.ExchangeRateDate <= dbCurrency.ExchangeRateDate || currency.ExchangeRateDate > DateTime.Now)
                             _result.ErrorMessages.Add($"Currency exchange rate date {currency.ExchangeRateDate} is invalid.");
