@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using InterviewCompany.Domain;
 using InterviewCompany.Domain.Repositories;
 using InterviewCompany.Domain.Repositories.Interfaces;
@@ -10,13 +6,14 @@ using InterviewCompany.Service;
 using InterviewCompany.Service.Tools;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using MongoDB.Driver;
+using Swashbuckle.AspNetCore.Swagger;
+using System;
+using System.IO;
+using System.Reflection;
 
 namespace InterviewCompany.API
 {
@@ -50,6 +47,28 @@ namespace InterviewCompany.API
             services.AddScoped<InvoiceCalculator>();
             services.AddScoped<IInvoiceService, InvoiceService>();
             services.AddScoped<CurrencyService>();
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info
+                {
+                    Version = "v1",
+                    Title = "Interview Company API",
+                    Description = "Interview project - Invoice with diffrent currencies",
+                    TermsOfService = "TODO",
+                    Contact = new Contact
+                    {
+                        Name = "Jarosław Jusiak",
+                        Email = "jaroslaw.jusiak@britenet.com.pl",
+                        Url = "https://britenet.com.pl"
+                    },
+                    License = new License
+                    {
+                        Name = "TODO",
+                        Url = "TODO"
+                    }
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -64,7 +83,11 @@ namespace InterviewCompany.API
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Interview Company API v1");
+            });
             app.UseHttpsRedirection();
             app.UseMvc();
         }

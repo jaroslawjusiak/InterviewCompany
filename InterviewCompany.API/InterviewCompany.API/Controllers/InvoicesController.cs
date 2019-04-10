@@ -23,11 +23,21 @@ namespace InterviewCompany.API.Controllers
             this._invoiceService = invoiceService;
         }
 
-        // GET: api/Invoices
+        /// <summary>
+        /// Gets all existing invoices
+        /// </summary>
+        /// <returns>Collection of invoice documents</returns>
+        /// <response code="200">Returns all found invoices</response>
+        /// <response code="404">If there is no invoice found to be returned.</response> 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            return Ok(await _invoiceService.GetAllAsync());
+            var results = await _invoiceService.GetAllAsync();
+
+            if (!results.Any())
+                return NotFound();
+
+            return Ok(results);
         }
 
         // GET api/Invoices/5A
