@@ -12,11 +12,11 @@ namespace InterviewCompany.API.Controllers
 {
     [Produces("application/json")]
     [Route("api/Currencies")]
-    public class CurrencyController : Controller
+    public class CurrenciesController : Controller
     {
         private readonly CurrencyService _currencyService;
 
-        public CurrencyController(CurrencyService currencyService)
+        public CurrenciesController(CurrencyService currencyService)
         {
             this._currencyService = currencyService;
         }

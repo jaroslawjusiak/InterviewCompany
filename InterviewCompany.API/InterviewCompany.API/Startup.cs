@@ -48,7 +48,7 @@ namespace InterviewCompany.API
             services.AddScoped<MongoDbContext>();
             services.AddScoped<ICurrencyRepository, MongoCurrencyRepository>();
             services.AddScoped<InvoiceCalculator>();
-            services.AddScoped<InvoiceService>();
+            services.AddScoped<IInvoiceService, InvoiceService>();
             services.AddScoped<CurrencyService>();
         }
 
