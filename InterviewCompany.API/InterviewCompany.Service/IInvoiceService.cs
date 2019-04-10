@@ -10,7 +10,7 @@ namespace InterviewCompany.Service
     public interface IInvoiceService
     {
         Task<IEnumerable<Invoice>> GetAllAsync();
-        Task<Invoice> GetByNumberAsync(string number);
+        Task<Invoice> GetByNumberAsync(int number);
         Task<int> InsertOneAsync(AddInvoiceModel invoice);
         Task<bool> RemoveOneAsync(Guid id);
     }

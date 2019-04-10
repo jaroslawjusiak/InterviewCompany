@@ -6,6 +6,9 @@ using InterviewCompany.Tests.Data;
 using InterviewCompany.Domain.Repositories.Interfaces;
 using InterviewCompany.Service;
 using InterviewCompany.API.Controllers;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 
 namespace InterviewCompany.Tests
 {
@@ -23,12 +26,17 @@ namespace InterviewCompany.Tests
         }
 
         [Fact]
-        public void NotAllowPostInvoiceWithEmptyCustomer()
+        public async Task NotAllowPostInvalidInvoiceModel()
         {
             _fixture.SetNullCustomer();
             var mockService = new Mock<IInvoiceService>();
             mockService.Setup(serv => serv.InsertOneAsync(_fixture.Invoice)).ReturnsAsync(1);
             var invoicesController = new InvoicesController(mockService.Object);
+            invoicesController.ModelState.AddModelError("BillTo", "Required");
+
+            var result = await invoicesController.Post(_fixture.Invoice);
+
+            Assert.IsType<BadRequestResult>(result);
         }
         
         

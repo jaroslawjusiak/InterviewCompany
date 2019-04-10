@@ -28,7 +28,7 @@ namespace InterviewCompany.Service
             return await _invoiceRepository.GetAllAsync();
         }
 
-        public async Task<Invoice> GetByNumberAsync(string number)
+        public async Task<Invoice> GetByNumberAsync(int number)
         {
             return await _invoiceRepository.GetByNumberAsync(number);
         }

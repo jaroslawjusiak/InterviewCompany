@@ -30,7 +30,7 @@ namespace InterviewCompany.API.Controllers
 
         // GET api/Invoices/5A
         [HttpGet, Route("{invoiceNumber}")]
-        public async Task<IActionResult> GetByInvoiceNumber(string invoiceNumber)
+        public async Task<IActionResult> GetByInvoiceNumber(int invoiceNumber)
         {
             return Ok(await _invoiceService.GetByNumberAsync(invoiceNumber));
         }
@@ -44,11 +44,14 @@ namespace InterviewCompany.API.Controllers
 
             return Created("api/Invoices", await _invoiceService.InsertOneAsync(invoiceModel));
         }
-
+        
         // DELETE api/Invoices/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
+            if (id == Guid.Empty)
+                return BadRequest();
+
             var result = await _invoiceService.RemoveOneAsync(id);
 
             if (result)

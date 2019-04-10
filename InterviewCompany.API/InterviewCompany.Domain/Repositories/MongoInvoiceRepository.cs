@@ -32,12 +32,12 @@ namespace InterviewCompany.Domain.Repositories
             }
         }
 
-        public async Task<Invoice> GetByNumberAsync(string number)
+        public async Task<Invoice> GetByNumberAsync(int number)
         {
             try
             {
                 return await _context.Invoices
-                        .Find(i => i.Number.Equals(number)).FirstOrDefaultAsync();
+                        .Find(i => i.Number == number).FirstOrDefaultAsync();
             }
             catch (Exception ex)
             {

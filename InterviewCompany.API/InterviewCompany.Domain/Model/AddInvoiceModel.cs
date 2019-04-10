@@ -10,12 +10,12 @@ namespace InterviewCompany.Domain.Model
 {
     public class AddInvoiceModel
     {
-        [Required()]
+        [Required]
         public Customer BillTo { get; set; }
-        [Required()]
+        [Required]
         public Customer Issuer { get; set; }
         [InvoiceItemValidation]
-        [Required()]
+        [Required]
         public InvoiceItem[] Items { get; set; }
     }
 }
