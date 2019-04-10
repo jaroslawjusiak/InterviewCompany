@@ -40,9 +40,6 @@ namespace InterviewCompany.Service.Validators
                 default:
                     return _result;
             }
-
-
-            throw new NotImplementedException();
         }
 
     }

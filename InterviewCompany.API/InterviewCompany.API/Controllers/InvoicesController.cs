@@ -4,7 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using InterviewCompany.Domain.Model;
 using InterviewCompany.Service;
+using InterviewCompany.Service.Validators;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -42,7 +44,17 @@ namespace InterviewCompany.API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            return Created("api/Invoices", await _invoiceService.InsertOneAsync(invoiceModel));
+            var response = await _invoiceService.InsertOneAsync(invoiceModel);
+
+            if(response.ValidationResult.Status == ValidationStatus.Error)
+            {
+                foreach (var error in response.ValidationResult.ErrorMessages)
+                    Log.Error(error);
+
+                return BadRequest(response.ValidationResult.ErrorMessages);
+            }
+
+            return Created("api/Invoices", response.InvoiceNumber);
         }
         
         // DELETE api/Invoices/5

@@ -5,6 +5,7 @@ using System;
 
 namespace InterviewCompany.Domain.Documents
 {
+    [BsonIgnoreExtraElements]
     public class Invoice
     {
         [BsonId]

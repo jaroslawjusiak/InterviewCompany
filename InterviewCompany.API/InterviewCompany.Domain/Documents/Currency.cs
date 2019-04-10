@@ -1,10 +1,12 @@
-﻿using System;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace InterviewCompany.Domain.Documents
 {
+    [BsonIgnoreExtraElements]
     public class Currency : IValidatableObject
     {
         public string Code { get; set; }

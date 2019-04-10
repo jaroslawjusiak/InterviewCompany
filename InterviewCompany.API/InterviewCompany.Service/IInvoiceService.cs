@@ -1,5 +1,6 @@
 ﻿using InterviewCompany.Domain.Documents;
 using InterviewCompany.Domain.Model;
+using InterviewCompany.Service.ResponseModel;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,7 +12,7 @@ namespace InterviewCompany.Service
     {
         Task<IEnumerable<Invoice>> GetAllAsync();
         Task<Invoice> GetByNumberAsync(int number);
-        Task<int> InsertOneAsync(AddInvoiceModel invoice);
+        Task<InvoiceInsertResponse> InsertOneAsync(AddInvoiceModel invoice);
         Task<bool> RemoveOneAsync(Guid id);
     }
 }

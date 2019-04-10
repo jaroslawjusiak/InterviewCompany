@@ -23,17 +23,15 @@ namespace InterviewCompany.Service.Tools
 
             foreach (var item in items)
             {
-                Log.Debug(total.ToString());
                 if (!item.CurrencyCode.Equals("USD"))
                 {
                     var exchangeRate = currencies.First(c => c.Code.Equals(item.CurrencyCode)).ExchangeRate;
-                    total += item.Quantity * item.UnitCost * exchangeRate;
+                    total += item.Quantity * item.UnitCost / exchangeRate;
                 }
                 else
                 {
                     total += item.Quantity * item.UnitCost;
                 }
-                Log.Debug($"Total amount so far: {total}");
             }
 
             return total;

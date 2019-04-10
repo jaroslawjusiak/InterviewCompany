@@ -48,8 +48,8 @@ namespace InterviewCompany.Tests
             var mockRepository = new Mock<ICurrencyRepository>();
             var resultList = new List <Currency>
             {
-                new Currency { Code = "EUR", Name = "Euro", ExchangeRate = 0.886552m, ExchangeRateDate = new DateTime(2019, 4, 9, 12, 45, 0) },
-                new Currency { Code = "GBP", Name = "British Pound", ExchangeRate = 0.765535m, ExchangeRateDate = new DateTime(2019, 4, 9, 12, 45, 0) },
+                new Currency { Code = "USD", Name = "Euro", ExchangeRate = 1, ExchangeRateDate = new DateTime(2019, 4, 9, 12, 45, 0) },
+                new Currency { Code = "EUR", Name = "British Pound", ExchangeRate = 0.886552m, ExchangeRateDate = new DateTime(2019, 4, 9, 12, 45, 0) },
                 new Currency { Code = "CHF", Name = "Swiss Franc", ExchangeRate = 0.998312m, ExchangeRateDate = new DateTime(2019, 4, 9, 12, 45, 0) },
                 new Currency { Code = "RUB", Name = "Russian Ruble", ExchangeRate = 64.767361m, ExchangeRateDate = new DateTime(2019, 4, 9, 13, 40, 0) }
             };
@@ -77,7 +77,8 @@ namespace InterviewCompany.Tests
             {
                 new InvoiceItem{ CurrencyCode = "USD", UnitCost = 2.43m, Quantity = 6, Amount = 14.58m},
                 new InvoiceItem{ CurrencyCode = "EUR", UnitCost = 0.71m, Quantity = 4, Amount = 2.84m},
-                new InvoiceItem{ CurrencyCode = "CHF", UnitCost = 70.12m, Quantity = 0.87m, Amount = 61.0044m}
+                new InvoiceItem{ CurrencyCode = "CHF", UnitCost = 70.12m, Quantity = 0.87m, Amount = 61.0044m},
+                new InvoiceItem{ CurrencyCode = "RUB", UnitCost = 15.11m, Quantity = 120m, Amount = 242.4m}
             };
 
             _invoice = new Invoice
@@ -87,7 +88,7 @@ namespace InterviewCompany.Tests
                 IssueDate = DateTime.Now,
                 Items = items,
                 Number = 1,
-                TotalAmount = 77.99923225m
+                TotalAmount = 106.8865539m
             };
         }
         #endregion

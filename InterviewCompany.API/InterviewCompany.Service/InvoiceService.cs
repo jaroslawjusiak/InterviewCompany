@@ -2,7 +2,9 @@
 using InterviewCompany.Domain.Documents;
 using InterviewCompany.Domain.Model;
 using InterviewCompany.Domain.Repositories.Interfaces;
+using InterviewCompany.Service.ResponseModel;
 using InterviewCompany.Service.Tools;
+using InterviewCompany.Service.Validators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,12 +15,14 @@ namespace InterviewCompany.Service
     public class InvoiceService : IInvoiceService
     {
         private readonly IInvoiceRepository _invoiceRepository;
+        private readonly ICurrencyRepository _currencyRepository;
         private readonly IMapper _mapper;
         private readonly InvoiceCalculator _calculator;
 
-        public InvoiceService(IInvoiceRepository invoiceRepository, IMapper mapper, InvoiceCalculator calculator)
+        public InvoiceService(IInvoiceRepository invoiceRepository, ICurrencyRepository currencyRepository, IMapper mapper, InvoiceCalculator calculator)
         {
             this._invoiceRepository = invoiceRepository;
+            this._currencyRepository = currencyRepository;
             this._mapper = mapper;
             this._calculator = calculator;
         }
@@ -33,14 +37,21 @@ namespace InterviewCompany.Service
             return await _invoiceRepository.GetByNumberAsync(number);
         }
 
-        public async Task<int> InsertOneAsync(AddInvoiceModel invoiceModel)
+        public async Task<InvoiceInsertResponse> InsertOneAsync(AddInvoiceModel invoiceModel)
         {
+            var invoiceValidator = new InvoiceValidator(_currencyRepository);
+            var response = await invoiceValidator.ValidateInvoiceCurrencies(invoiceModel);
+
+            if (response.ValidationResult.Status == ValidationStatus.Error)
+                return await Task.FromResult(response);
+
             var invoice = _mapper.Map<Invoice>(invoiceModel);
             invoice.Number = await GenerateInvoiceNumberAsync();
             invoice.TotalAmount = await _calculator.CalculateTotalAmount(invoice.Items);
             await _invoiceRepository.InsertOneAsync(invoice);
+            response.InvoiceNumber = invoice.Number;
 
-            return invoice.Number;
+            return await Task.FromResult(response);
         }
 
         public async Task<bool> RemoveOneAsync(Guid id)
@@ -55,6 +66,9 @@ namespace InterviewCompany.Service
             var lastInvoiceNumber = await _invoiceRepository.GetLastInvoiceNumberAsync();
             return ++lastInvoiceNumber;
         }
+
+        
+
         #endregion
     }
 }
