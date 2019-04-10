@@ -53,7 +53,7 @@ namespace InterviewCompany.Tests
                 new Currency { Code = "CHF", Name = "Swiss Franc", ExchangeRate = 0.998312m, ExchangeRateDate = new DateTime(2019, 4, 9, 12, 45, 0) },
                 new Currency { Code = "RUB", Name = "Russian Ruble", ExchangeRate = 64.767361m, ExchangeRateDate = new DateTime(2019, 4, 9, 13, 40, 0) }
             };
-            mockRepository.Setup(repo => repo.GetAllAsync()).Returns(Task.FromResult<List<Currency>>(resultList));
+            mockRepository.Setup(repo => repo.GetAllAsync()).ReturnsAsync(resultList);
             _sut = new InvoiceCalculator(mockRepository.Object);
         }
 
