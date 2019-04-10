@@ -11,7 +11,7 @@ namespace InterviewCompany.Domain.Repositories.Interfaces
         Task<IEnumerable<Invoice>> GetAllAsync();
         Task<Invoice> GetByNumberAsync(int number);
         Task InsertOneAsync(Invoice invoice);
-        Task<bool> RemoveOneAsync(Guid id);
+        Task<bool> RemoveOneAsync(int number);
         Task<int> GetLastInvoiceNumberAsync();
     }
 }

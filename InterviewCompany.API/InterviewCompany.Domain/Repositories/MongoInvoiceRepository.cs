@@ -69,13 +69,13 @@ namespace InterviewCompany.Domain.Repositories
             await _context.Invoices.InsertOneAsync(invoice);
         }
 
-        public async Task<bool> RemoveOneAsync(Guid id)
+        public async Task<bool> RemoveOneAsync(int number)
         {
             try
             {
                 DeleteResult actionResult
                     = await _context.Invoices.DeleteOneAsync(
-                        Builders<Invoice>.Filter.Eq("Id", id));
+                        Builders<Invoice>.Filter.Eq("Number", number));
 
                 return actionResult.IsAcknowledged
                     && actionResult.DeletedCount > 0;

@@ -58,13 +58,13 @@ namespace InterviewCompany.API.Controllers
         }
         
         // DELETE api/Invoices/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(Guid id)
+        [HttpDelete("{number}")]
+        public async Task<IActionResult> Delete(int number)
         {
-            if (id == Guid.Empty)
+            if (number <= 0)
                 return BadRequest();
 
-            var result = await _invoiceService.RemoveOneAsync(id);
+            var result = await _invoiceService.RemoveOneAsync(number);
 
             if (result)
                 return NoContent();

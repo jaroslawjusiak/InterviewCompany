@@ -54,9 +54,9 @@ namespace InterviewCompany.Service
             return await Task.FromResult(response);
         }
 
-        public async Task<bool> RemoveOneAsync(Guid id)
+        public async Task<bool> RemoveOneAsync(int number)
         {
-               return await _invoiceRepository.RemoveOneAsync(id);
+               return await _invoiceRepository.RemoveOneAsync(number);
         }
 
         #region Private members

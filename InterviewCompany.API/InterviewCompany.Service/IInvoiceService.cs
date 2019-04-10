@@ -13,6 +13,6 @@ namespace InterviewCompany.Service
         Task<IEnumerable<Invoice>> GetAllAsync();
         Task<Invoice> GetByNumberAsync(int number);
         Task<InvoiceInsertResponse> InsertOneAsync(AddInvoiceModel invoice);
-        Task<bool> RemoveOneAsync(Guid id);
+        Task<bool> RemoveOneAsync(int number);
     }
 }
