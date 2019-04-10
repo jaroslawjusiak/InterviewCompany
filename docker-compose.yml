@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  ic_api:
+    container_name: icapi
+    hostname: icapi.dev
+#    image: TODO insert proper URL here
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    ports:
+      - "$HTTP_API_PORT:80"
+      - "$HTTPS_API_PORT:443"
+    depends_on:
+      - ic_mongo
+    networks:
+      bqm-net:
+        aliases:
+          - icapi.dev
+
+  ic_mongo:
+    container_name: ic_mongo
+    image: "mongo:3.0"
+    hostname: mongodb.dev
+    ports:
+      - "27017:27017"
+    volumes:
+      - ic_mongo-data-volume:/data/db
+    networks:
+      bqm-net:
+        aliases:
+          - mongodb.dev
+
+volumes:
+  ic_mongo-data-volume:
+
+networks:
+  bqm-net:
