@@ -43,8 +43,8 @@ namespace InterviewCompany.API.Controllers
         }
 
         // PUT api/Currencies/
-        [HttpPut()]
-        public async Task<IActionResult> Delete([FromBody]Currency currency)
+        [HttpPut]
+        public async Task<IActionResult> Update([FromBody]Currency currency)
         {
             var results = await _currencyService.UpdateCurrencyAsync(currency);
 

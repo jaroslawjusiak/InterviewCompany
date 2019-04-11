@@ -14,6 +14,11 @@ namespace InterviewCompany.Tests.Data
             Invoice = GenerateNewInvoiceModel();
         }
 
+        public void Reset()
+        {
+            Invoice = GenerateNewInvoiceModel();
+        }
+
         public void SetNullCustomer()
         {
             Invoice.BillTo = null;

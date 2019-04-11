@@ -21,7 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\InterviewCompany.Core\InterviewCompany.Core.csproj" />
     <ProjectReference Include="..\InterviewCompany.Domain\InterviewCompany.Domain.csproj" />
     <ProjectReference Include="..\InterviewCompany.Service\InterviewCompany.Service.csproj" />
   </ItemGroup>
